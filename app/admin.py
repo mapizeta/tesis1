@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Proceso,Pregunta,ElegirRespuesta,PreguntasRespondidas,QuizUsuario,CampanaAsignada,Empresa,tipo_usuario
+from .models import *
 
 from .forms import ElegirInLineFormset
 
@@ -21,6 +21,9 @@ class PreguntasRespondidasAdmin(admin.ModelAdmin):
     list_display=['pregunta','respuesta','correcta','puntaje objtenido']
 
 
+class ProfileAdmin(admin.ModelAdmin):
+    search_fields = ['user']
+    list_display = ('id','role', 'user')
 
 
 # Register your models here.
@@ -32,4 +35,6 @@ admin.site.register(PreguntasRespondidas)
 admin.site.register(CampanaAsignada)
 admin.site.register(Empresa)
 admin.site.register(tipo_usuario)
+admin.site.register(Profile,ProfileAdmin)
+
 

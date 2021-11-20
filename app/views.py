@@ -5,17 +5,41 @@ from django.http.response import Http404
 from django.shortcuts import render,redirect,get_object_or_404
 from .forms import ListUser, RegistroFormulario,UsuarioLoginFormulario, preguntaquizform,respuestaquizform,tipoproceso,formcampaña,ResetPasswordForm
 from django.contrib.auth import authenticate, login, logout
-from .models import Proceso, QuizUsuario,Pregunta,PreguntasRespondidas, CampanaAsignada
+from .models import Proceso, QuizUsuario,Pregunta,PreguntasRespondidas, CampanaAsignada, Profile
 from django.http import HttpResponseNotFound
 from django.core.exceptions import ObjectDoesNotExist
 # from django.core.cache import cache
 from django.shortcuts import HttpResponse
 from django.contrib.auth.decorators import login_required
+from django.http import Http404
 
 # Create your views here.
 
+@login_required
+def HomeUsuario(request):
+    
+    context = {}
+    if request.session:
+        try:
+            profile = Profile.objects.get(user=request.session['_auth_user_id'])
+            request.session['profile'] = profile.role
+            
+            if profile.role == 1:
+                context['admin'] = True
+            if profile.role == 2:
+                context['evaluador'] = True
+            if profile.role == 3:
+                context['evaluado'] = True
+
+        except Profile.DoesNotExist:
+            raise Http404
+    
+    return render(request,'Usuario/homeusuario.html', context)
+            
 def home(request):
     return render(request,'Usuario/login.html')
+
+
 @login_required
 def perfil(request):
     return render(request,'perfil.html')
@@ -64,10 +88,7 @@ def loginView(request):
 def logout_vista(request):
     logout(request)
     return redirect('/')
-@login_required
-def HomeUsuario(request):
 
-    return render(request, 'Usuario/homeusuario.html')
 @login_required
 def jugar(request):
     

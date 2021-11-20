@@ -1,4 +1,8 @@
-{% extends 'base.html' %} {% block contenido %} {% csrf_token %}
+{% extends 'base.html' %} 
+{% block contenido %} 
+
+{% csrf_token %}
+
 {% load static %}
 <div class="app-container">
     <div class="app-header">
@@ -76,7 +80,6 @@
         <div class="projects-section">
             <div class="projects-section-header">
                 
-                 {% if user.is_superuser %}
 
             </div>
 
@@ -115,50 +118,33 @@
                 </div>
             </div>
             <div class="project-boxes jsGridView">
+
+            {% if admin %}
                 <div class="project-box-wrapper">
                     <div class="project-box" style="background-color: #fee4cb;">
                         <div class="project-box-header">
-                            
                             <div class="more-wrapper">
                                 <button class="project-btn-more">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-vertical">
-                      <circle cx="12" cy="12" r="1" />
-                      <circle cx="12" cy="5" r="1" />
-                      <circle cx="12" cy="19" r="1" /></svg>
-                  </button>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-vertical">
+                                        <circle cx="12" cy="12" r="1" />
+                                        <circle cx="12" cy="5" r="1" />
+                                        <circle cx="12" cy="19" r="1" />
+                                    </svg>
+                                </button>
                             </div>
                         </div>
+
                         <div class="project-box-content-header">
                             <img src="../static/app/img/Brain.png" class=" img-fluid container-sm " style="width:100px;height:100px">
-
-
                             <a href="{% url 'crearquiz' %}">
-                                <button type="button" class="btn-success">
-                                
-                                Crear Proceso
-                            </button>
+                                <button type="button" class="btn-success">Crear Proceso</button>
                             </a>
-
-
-
-
-
-
-
-
-
-
                         </div>
-                        <div class="box-progress-wrapper">
-
-
-
-
-
-                        </div>
-
+                        <div class="box-progress-wrapper"></div>
                     </div>
                 </div>
+            {% endif %}
+            {% if admin %}
                 <div class="project-box-wrapper">
                     <div class="project-box" style="background-color: #fee4cb;">
                         <div class="project-box-header">
@@ -183,21 +169,10 @@
                             </button>
                             </a>
 
-
-
-
-
-
-
-
-
-
                         </div>
-                        <div class="box-progress-wrapper">
-
-
-
-
+                {% endif %}
+                {% if evaluador or admin%}
+                <div class="box-progress-wrapper">
 
                         </div>
 
@@ -209,11 +184,11 @@
                             
                             <div class="more-wrapper">
                                 <button class="project-btn-more">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-vertical">
-                  <circle cx="12" cy="12" r="1" />
-                  <circle cx="12" cy="5" r="1" />
-                  <circle cx="12" cy="19" r="1" /></svg>
-              </button>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-vertical">
+                                    <circle cx="12" cy="12" r="1" />
+                                    <circle cx="12" cy="5" r="1" />
+                                    <circle cx="12" cy="19" r="1" /></svg>
+                                </button>
                             </div>
                         </div>
                         <div class="project-box-content-header">
@@ -226,21 +201,21 @@
                               </button>
                             </a>
                         </div>
-
-
                     </div>
                 </div>
+                {% endif %}
+                {% if evaluador or admin%}
                 <div class="project-box-wrapper">
                     <div class="project-box">
                         <div class="project-box-header">
                             
                             <div class="more-wrapper">
                                 <button class="project-btn-more">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-vertical">
-                  <circle cx="12" cy="12" r="1" />
-                  <circle cx="12" cy="5" r="1" />
-                  <circle cx="12" cy="19" r="1" /></svg>
-              </button>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-vertical">
+                                    <circle cx="12" cy="12" r="1" />
+                                    <circle cx="12" cy="5" r="1" />
+                                    <circle cx="12" cy="19" r="1" /></svg>
+                                </button>
                             </div>
                         </div>
                         <div class="project-box-content-header">
@@ -254,25 +229,22 @@
 
                         </div>
                         <div class="box-progress-wrapper">
-
-
-
                         </div>
-
                     </div>
                 </div>
-                
+                {% endif %}
+                {% if evaluador or evaluado or admin%}
                 <div class="project-box-wrapper">
                     <div class="project-box" style="background-color: #d5deff;">
                         <div class="project-box-header">
                             
                             <div class="more-wrapper">
                                 <button class="project-btn-more">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-vertical">
-                  <circle cx="12" cy="12" r="1" />
-                  <circle cx="12" cy="5" r="1" />
-                  <circle cx="12" cy="19" r="1" /></svg>
-              </button>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-vertical">
+                                    <circle cx="12" cy="12" r="1" />
+                                    <circle cx="12" cy="5" r="1" />
+                                    <circle cx="12" cy="19" r="1" /></svg>
+                                </button>
                             </div>
                         </div>
                         <div class="project-box-content-header">
@@ -283,61 +255,37 @@
                               </button>
                             </a>
                         </div>
-                        <div class="box-progress-wrapper">
-
-
-
-
-
-                        </div>
+                        <div class="box-progress-wrapper"></div>
                     </div>
+                </div>
+
+                   {% endif %} 
                     
-                    {% else %}
-                    
+                {% if evaluado or admin%} 
                     <div class="project-box-wrapper">
                         <div class="project-box" style="background-color: #d5deff;">
                             <div class="project-box-header">
                                 <span>Noviembre 3, 2021</span>
                                 <div class="more-wrapper">
                                     <button class="project-btn-more">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-vertical">
-                                <circle cx="12" cy="12" r="1" />
-                                <circle cx="12" cy="5" r="1" />
-                                <circle cx="12" cy="19" r="1" /></svg>
-                            </button>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-vertical">
+                                        <circle cx="12" cy="12" r="1" />
+                                        <circle cx="12" cy="5" r="1" />
+                                        <circle cx="12" cy="19" r="1" /></svg>
+                                    </button>
                                 </div>
                             </div>
                             <div class="project-box-content-header">
-                                {% if request.user.is_authenticated %}
-
-                                
-
                                 <img src="../static/app/img/Brain.png" class=" img-fluid container-sm " style="width:100px;height:100px">
                                 <a href="{% url 'tablaprocesos' %}">
-                                    <button class="btn-success">
-                                        Ir a quiz
-                                    </button>
+                                    <button class="btn-success">Ir a quiz</button>
                                 </a>
                                 
-                                {% else %}
-
                                 <a href="{% url 'registro' %}">Registrarse</a>
-                                <a href="{% url 'login' %}">Inicia Sesión</a> {% endif %}
-
-                                
-
-
-
-
-
-
+                                <a href="{% url 'login' %}">Inicia Sesión</a>
                             </div>
-
                         </div>
-
                     </div>
-                    {% endif %}
-                </div>
-            </div>
+                {% endif %} 
 
-            {% endblock %}
+{% endblock %}

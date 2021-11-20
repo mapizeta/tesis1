@@ -153,6 +153,7 @@ class tipo_usuario(models.Model):
     image = models.ImageField(default='default.jpg', upload_to='media')
     
     cargo = models.CharField(max_length=100,null=True)
+    
     class Tipo(models.TextChoices):
         ADMIN = '1', "Admin"
         EVALUADO = '2', "Evaluado"
@@ -172,3 +173,18 @@ def create_user_profile(sender, instance, created, **kwargs):
 @receiver(post_save, sender=User)
 def save_user_profile(sender, instance, **kwargs):
     users = User.objects.all().select_related('profile')
+
+ROLE_CHOICES = (
+        (1, 'Admin'),
+        (2, 'Evaluador'),
+        (3, 'Evaluado'),
+        )
+
+class Profile(models.Model):
+    user = models.ForeignKey(User,null=True,on_delete=models.CASCADE)
+    role = models.PositiveSmallIntegerField(choices=ROLE_CHOICES, null=True, blank=True)
+    
+    def __str__(self):
+        return str(self.role)
+
+
