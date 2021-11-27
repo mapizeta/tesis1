@@ -139,12 +139,6 @@ class Empresa(models.Model):
     
 
 
-
-
-
-
-
-
 from django.contrib.auth.models import User
 
 class tipo_usuario(models.Model):

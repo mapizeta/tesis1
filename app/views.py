@@ -137,6 +137,7 @@ def registro(request):
     mensaje = "GUARDADO CORRECTAMENTE"
     if request.method == 'POST':
         form = RegistroFormulario(request.POST)
+        
         if form.is_valid():
             form.save()
             mensaje()
